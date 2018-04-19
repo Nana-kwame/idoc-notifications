@@ -178,5 +178,5 @@ app.get("/userNotifications/:hosID", (req,res,next) => {
 
 
 
-app.listen(3030);
+app.listen(process.env.PORT || 3030);
 console.log('Server is running on port 3030');
