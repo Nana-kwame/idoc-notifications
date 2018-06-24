@@ -107,7 +107,7 @@ app.use('/', router);
 
 
 app.get('/notification/:hospitalName', (req,res,next)=>{
-    mongoOp.findOne({hospitalName:req.params.hospitalName}).select("patName diagnosis hosID specialist date hospitalName")
+    mongoOp.find({hospitalName:req.params.hospitalName}).select("patName diagnosis hosID specialist date hospitalName")
     .exec((err,notifcation)=> {
         if(err){
             return next(err);
@@ -151,7 +151,7 @@ app.post("/userNotifications",function (req,res){
     db.save(function(err) {
 
         if(err){
-            respomse = {"error":true, "message":"Error adding the data"}
+            response = {"error":true, "message":"Error adding the data"}
         } else {
             response = {"error":false, "message":"Data added"}
         }
