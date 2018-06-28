@@ -174,7 +174,7 @@ app.get("/userNotifications/:hosID", (req,res,next) => {
 
 app.delete("/userNotfications", function(req,res){
     var respones = {};
-    monogoUser.findById(req.params.id,function(err,data){
+    mongoUser.findById(req.params.id,function(err,data){
         if(err){
             responses = { "error": true, "message": "Error fetching data" }
         }else {
