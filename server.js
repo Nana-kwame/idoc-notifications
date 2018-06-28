@@ -172,12 +172,19 @@ app.get("/userNotifications/:hosID", (req,res,next) => {
     })
 })
 
-app.delete("/userNotfications/:_id", function(req,res){
-    monogoUser.findByIdAndRemove({_id:req.params._id},function(err,res){
+app.delete("/userNotfications", function(req,res){
+    var respones = {};
+    monogoUser.findById(req.params.id,function(err,data){
         if(err){
-            res.send({'error':'An error has ocurred'})
+            responses = { "error": true, "message": "Error fetching data" }
         }else {
-            res.send('Notfications deleted')
+            if (err) {
+                response = { "error": true, "message": "Error deleting data" };
+            } else {
+                response = { "error": true, "message": "Data associated with " + req.params.id + "is deleted" };
+            }
+
+            res.json(responses);
         }
     })
 })
