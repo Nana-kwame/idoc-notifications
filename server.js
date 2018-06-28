@@ -172,7 +172,7 @@ app.get("/userNotifications/:hosID", (req,res,next) => {
     })
 })
 
-app.delete("/userNotfications", function(req,res){
+app.delete("/userNotifications/:id", function(req,res){
     var responses = {};
     mongoUser.findById(req.params.id,function(err,data){
         if(err){
@@ -182,7 +182,7 @@ app.delete("/userNotfications", function(req,res){
                 if (err) {
                     responses = { "error": true, "message": "Error deleting data" };
                 } else {
-                    responses = { "error": true, "message": "Data associated with " + req.params.id + "is deleted" };
+                    responses = { "error": false, "message": "Data associated with " + req.params.id + "is deleted" };
                 }
     
                 res.json(responses);
