@@ -172,6 +172,16 @@ app.get("/userNotifications/:hosID", (req,res,next) => {
     })
 })
 
+app.delete("/userNotfications/:id", function(req,res){
+    monogoUser.findByIdAndRemove({_id:req.params._id},function(err,res){
+        if(err){
+            res.send({'error':'An error has ocurred'})
+        }else {
+            res.send('Notfications deleted')
+        }
+    })
+})
+
 
 
 
