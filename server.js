@@ -178,13 +178,18 @@ app.delete("/userNotfications", function(req,res){
         if(err){
             responses = { "error": true, "message": "Error fetching data" }
         }else {
-            if (err) {
-                response = { "error": true, "message": "Error deleting data" };
-            } else {
-                response = { "error": true, "message": "Data associated with " + req.params.id + "is deleted" };
-            }
 
-            res.json(responses);
+ mongoUser.remove({ _id: req.params.id }, function (err) {
+    if (err) {
+        response = { "error": true, "message": "Error deleting data" };
+    } else {
+        response = { "error": true, "message": "Data associated with " + req.params.id + "is deleted" };
+    }
+
+    res.json(responses);
+ }
+               
+           
         }
     })
 })
