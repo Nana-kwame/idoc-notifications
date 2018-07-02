@@ -147,7 +147,7 @@ app.post("/userNotifications",function (req,res){
     db.patName = req.body.patName;
     db.hosID = req.body.hosID;
     db.message = req.body.message;
-
+    db.deleted = false;
     db.save(function(err) {
 
         if(err){
@@ -159,7 +159,7 @@ app.post("/userNotifications",function (req,res){
 })
 
 app.get("/userNotifications/:hosID", (req,res,next) => {
-    mongoUser.find({hosID:req.params.hosID}).select("hospitalName patName message hosID")
+    mongoUser.find({hosID:req.params.hosID, deleted:false}).select("hospitalName patName message hosID")
     .exec((err,notifcation) => {
         if(err){
             return next(err)
@@ -178,7 +178,7 @@ app.delete("/userNotifications/:id", function(req,res){
         if(err){
             responses = { "error": true, "message": "Error fetching data" }
         }else {
-            mongoUser.remove({_id: req.params.id},function(err){
+            mongoUser.findOneAndUpdate({_id: req.params.id}, {deleted = true},function(err){
                 if (err) {
                     responses = { "error": true, "message": "Error deleting data" };
                 } else {
