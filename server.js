@@ -178,7 +178,7 @@ app.delete("/userNotifications/:id", function(req,res){
         if(err){
             responses = { "error": true, "message": "Error fetching data" }
         }else {
-            mongoUser.findOneAndUpdate({_id: req.params.id}, {deleted = true},function(err){
+            mongoUser.findOneAndUpdate({_id: req.params.id}, {deleted: true},function(err){
                 if (err) {
                     responses = { "error": true, "message": "Error deleting data" };
                 } else {
