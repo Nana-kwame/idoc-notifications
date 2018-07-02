@@ -159,7 +159,7 @@ app.post("/userNotifications",function (req,res){
 })
 
 app.get("/userNotifications/:hosID", (req,res,next) => {
-    mongoUser.find({hosID:req.params.hosID},{deleted:false}).select("hospitalName patName message hosID")
+    mongoUser.find({hosID:req.params.hosID, deleted:false}).select("hospitalName patName message hosID")
     .exec((err,notifcation) => {
         if(err){
             return next(err)
